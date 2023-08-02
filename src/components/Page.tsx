@@ -5,16 +5,25 @@ export const Page = () => {
     minute: "2-digit",
   });
 
-  const timeValue = parseFloat(time).toFixed(2);
+  const timeValue = time.split(".");
   let currentPeriod;
   const currentMinute: number | string = current.getMinutes();
-  console.log(timeValue, time, current.getMinutes(), parseInt(currentMinute));
+  console.log(
+    timeValue,
+    time.split(".")[0],
+    current.getMinutes(),
+    +currentMinute
+  );
 
-  if (parseInt(time) >= 6 && parseInt(time) <= 12) {
+  if (parseInt(time) >= 0 && parseInt(time) <= 12 && +currentMinute > 0) {
     currentPeriod = "Bom Dia";
-  } else if (parseInt(time) >= 12 && parseInt(time) <= 18) {
+  } else if (
+    parseInt(time) >= 12 &&
+    parseInt(time) < 18 &&
+    +currentMinute > 0
+  ) {
     currentPeriod = "Boa Tarde";
-  } else {
+  } else if (parseInt(time) >= 18 && parseInt(time) <= 23) {
     currentPeriod = "Boa Noite";
   }
 
